@@ -1,6 +1,6 @@
 # Web-sovellus: ReCraft/GreenCraft/Craftify
 
-## Sovellus, jossa käyttäjät voivat löytää inspiraatiota sekä jakaa kierrätysmateriaaleista tehtäviä DIY-projekteja, uusiokäyttö- ja askarteluideoita. Se on suunnattu erityisesti ekologisesta elämäntyylistä kiinnostuneille askartelun ystäville, jotka haluavat hyödyntää jätteitä luovasti ja innovatiivisesti. Sovellus toimii myös inspiraation lähteenä esimerkiksi koulujen kuvataidetunneille ja askarteluprojekteihin, edistäen kestävää kehitystä ja luovuutta.
+### Sovellus, jossa käyttäjät voivat löytää inspiraatiota sekä jakaa kierrätysmateriaaleista tehtäviä DIY-projekteja, uusiokäyttö- ja askarteluideoita. Se on suunnattu erityisesti ekologisesta elämäntyylistä kiinnostuneille askartelun ystäville, jotka haluavat hyödyntää jätteitä luovasti ja innovatiivisesti. Sovellus toimii myös inspiraation lähteenä esimerkiksi koulujen kuvataidetunneille ja askarteluprojekteihin, edistäen kestävää kehitystä ja luovuutta.
 
 ## Keskeiset ominaisuudet ja toiminnot: 
 
