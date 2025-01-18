@@ -1,36 +1,56 @@
-# Web-sovellus: ReCraft/GreenCraft/Craftify
+# Web-sovellus: TravelTales
 
-### Sovellus, jossa käyttäjät voivat löytää inspiraatiota sekä jakaa kierrätysmateriaaleista tehtäviä DIY-projekteja, uusiokäyttö- ja askarteluideoita. Se on suunnattu erityisesti ekologisesta elämäntyylistä kiinnostuneille askartelun ystäville, jotka haluavat hyödyntää jätteitä luovasti ja innovatiivisesti. Sovellus toimii myös inspiraation lähteenä esimerkiksi koulujen kuvataidetunneille ja askarteluprojekteihin, edistäen kestävää kehitystä ja luovuutta.
+## Kuvaus:
 
-## Keskeiset ominaisuudet ja toiminnot: 
+### Web-sovellus, jossa käyttäjät voivat jakaa matkakokemuksiaan, valokuvia ja tarinoita ympäri maailmaa. Sovellus toimii eräänlaisena **matkapäiväkirjana**, jossa käyttäjät voivat tallentaa muistoja, löytää inspiraatiota muilta matkaajilta sekä jakaa omia vinkkejään ja suosituksiaan eri matkakohteista. Sen avulla luodaan yhteisö, jossa matkailijat voivat **opastaa** ja **inspiroida** toisiaan, sekä löytää **piilotettuja helmiä** eri puolilta maailmaa.
+
+### Matkustaminen ei ole vain määränpää, vaan koko matka — TravelTales auttaa tallentamaan nämä hetket ja jakamaan ne muiden kanssa.
+
+## Keskeiset ominaisuudet ja toiminnot:
 
 1. **Profiilitoiminto ja yhteisö:**
-    - Käyttäjät voivat halutessaan **luoda profiilin**, jonka avulla voi helposti tykkäyksillä **tallentaa** omia suosikkeja **kommentoida** muiden julkaisuja sekä **seurata** toisten käyttäjien profiileja.
-    - Profiilin luoneet käyttäjät voivat **lisätä** myös omia **projekteja sekä ideoita**.
 
-2. **Projektin/idean lisääminen:**
-    - Käyttäjä voi lisätä **projektin otsikon, kuvan, tarvittavat materiaalit ja vaiheittaiset ohjeet**. Projektiin voi lisätä **kategorian** ja **"tageja"**, esim. käyttötarkoituksen tai aihealueen mukaan ("kierrätys", "askartelu lapsille", "puukäsityöt", "ompelu")
-    - Toisten käyttäjien on mahdollista tykätä ja kommentoida julkaisuja sekä kysyä tarvittaessa lisä ohjeita projektin kehittäjältä.
+   - Käyttäjät voivat **luoda henkilökohtaisen profiilin**, johon he voivat lisätä matkakuvia, tarinoita ja matkasuosituksia.
+   - Käyttäjät voivat **seurata** toisten matkailijoiden profiileja ja nähdä heidän matkapostauksensa.
+   - **Tykkäykset ja kommentointi:** Käyttäjät voivat tykkäyksillä **tallentaa** suosikkikohteita, **kommentoida** muiden julkaisuja ja keskustella matkakohteista.
+
+2. **Matkakokemuksen lisääminen:**
+
+   - Käyttäjät voivat lisätä **matkakuvia, kohteen sijainnin sekä kuvauksen matkasta** (esim. vinkkejä, parhaita muistoja, aktiviteetteja ja suosikkipaikkoja tms.).
+   - **Geolokaatio ja kartta**: Sovellus käyttää geotunnistamista, jolloin matkakuvat saavat tarkat sijainnit, jotka näkyvät interaktiivisella kartalla esim. Google Mapsin tai Leaflet.js:n avulla.
 
 3. **Hakutoiminto:**
-    - Käyttäjien on mahdollista **hakea** erilaisia **projekteja** ja **ideoita** esimerkiksi materiaalin, vaikeustason tai käyttötarkoituksen perusteella.
 
-4. **Tykkäykset, kommentointi, sekä yhteisöllisyys**:
-    - Käyttäjät voivat **kommentoida** sekä **jättää palautetta** projektiin. Kommenttikentässä voi myös **kysyä lisäohjeita sekä vinkkejä**. 
+   - Käyttäjät voivat etsiä **matkakuvia ja -tarinoita** eri kriteerien mukaan, kuten **maan, kaupungin tai aihetunnisteen** perusteella (esim. "kaupunkilomat", "seikkailumatkat", "rantalomat").
+   - Etusivulla näkyy **suosituimmat julkaisut ja uudet postaukset**, jotka auttavat käyttäjiä löytämään inspiroivia kohteita.
 
-5. **Suosituimpien ja uusimpien projektien listaus:**
-    - Etusivulla näkyvät esim. tykätyimmät, ajankohtaisimmat ja uusimmat projektit. Tämä antaa käyttäjille heti inspiraatiota ja tuo esille aktiivista yhteisön toimintaa.
+4. **Yhteisöllisyys ja vuorovaikutus**:
 
-6. **Turvallisuus:**
-    - Käyttäjillä on **mahdollisuus poistaa omia** projektejaan, tykkäyksiään ja kommenttejaan.
-    - Projektin luoja voi myös poistaa omasta julkaisustaan epäsoveliaita tai loukkaavia kommentteja.
+   - **Kommentointi ja palautteen jättäminen**: Käyttäjät voivat keskustella ja jättää palautetta muiden matkapostauksiin, jakaa kokemuksia ja vinkkejä.
+   - **Suosikkipaikat**: Käyttäjät voivat tallentaa ja jakaa omia suosikkipaikkojaan.
 
-## Tekniset vaatimukset: 
+5. **Turvallisuus ja yksityisyys:**
+   - Käyttäjillä on **mahdollisuus poistaa omia** matkakokemuksiaan, kuviaan, kommenttejaan ja tykkäyksiään.
+   - Kommenttien hallinta: Projektin luoja voi poistaa epäsoveliaita tai loukkaavia kommentteja omista julkaisuistaan.
 
-- **Frontend**: React + TypeScript + Tailwind CSS, responsiivinen käyttöliittymä, joka toimii myös mobiilissa.
-- **Backend**: Node.js (Express) + TypeScript, RESTful-arkkitehtuuri.
-- **Tietokanta**: MySQL, käyttäjien, projektien, materiaalien, kuvien, tykkäyksien sekä kommenttien tallentamiseen.
-- **Autentikointi ja tietosuoja**: Käyttäjien kirjautumisen ja rekisteröitymisen varmistaminen (esim. JWT) luo luottamusta ja turvallisuutta.
-- **Kuvien tallennus ja optimointi:** Sovellus tukee kuvien optimointia nopean latausajan takaamiseksi.
-- **Versiohallinta**: Git ja GitHub, lähdekoodi dokumentoitu ja kommentoitu.
+## Tekniset vaatimukset:
 
+- **Frontend**: 
+    - React + TypeScript + Tailwind CSS 
+    - Käyttöliittymä: Responsiivinen ja visuaalisesti miellyttävä käyttöliittymä, joka mahdollistaa helpon selaamisen ja kuvien katselun mobiililaitteilla ja työpöytäkoneilla.
+
+- **Backend**: 
+    - Node.js (Express) + TypeScript
+    - API: RESTful-arkkitehtuuri, joka takaa joustavan ja skaalautuvan palvelinpuolen logiikan.
+
+- **Tietokanta**: 
+    - MySQL: Tietokannan avulla käyttäjien, matkakokemusten, kuvien, tykkäyksien ja kommenttien hallinta.
+
+- **Geolokaatio ja kartta**:
+    - Google Maps API tai Leaflet.js kartan ja geolokaatio-ominaisuuksien tukemiseksi paikkojen sijainnin näyttämiseen.
+
+- **Autentikointi ja tietosuoja**: 
+    - **JWT**-pohjainen käyttäjien kirjautuminen ja rekisteröinti.
+ 
+- **Versiohallinta**:
+    - GitHub, lähdekoodi dokumentoitu ja kommentoitu.
