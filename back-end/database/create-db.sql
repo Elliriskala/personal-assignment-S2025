@@ -1,6 +1,6 @@
 -- creating database for the project
 
--- source C:\Users\ellir\Hybridisovellukset\personal-assignment-S2025\back-end\database\create-db.sql;
+-- source C:/Users/ellir/Hybridisovellukset/personal-assignment-S2025/back-end/database/create-db.sql;
 
 DROP DATABASE IF EXISTS traveltime;
 CREATE DATABASE traveltime;
