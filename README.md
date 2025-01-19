@@ -1,10 +1,10 @@
-# Web-sovellus: TravelTales
+# Web-sovellus: TravelTime!
 
 ## Kuvaus:
 
 ### Web-sovellus, jossa käyttäjät voivat jakaa matkakokemuksiaan, valokuvia ja tarinoita ympäri maailmaa. Sovellus toimii eräänlaisena **matkapäiväkirjana**, jossa käyttäjät voivat tallentaa muistoja, löytää inspiraatiota muilta matkaajilta sekä jakaa omia vinkkejään ja suosituksiaan eri matkakohteista. Sen avulla luodaan yhteisö, jossa matkailijat voivat **opastaa** ja **inspiroida** toisiaan, sekä löytää **piilotettuja helmiä** eri puolilta maailmaa.
 
-### Matkustaminen ei ole vain määränpää, vaan koko matka — TravelTales auttaa tallentamaan nämä hetket ja jakamaan ne muiden kanssa.
+### Matkustaminen ei ole vain määränpää, vaan koko matka — TravelTime auttaa tallentamaan nämä hetket ja jakamaan ne muiden kanssa.
 
 ## Keskeiset ominaisuudet ja toiminnot:
 
