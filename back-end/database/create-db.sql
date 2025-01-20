@@ -6,14 +6,23 @@ DROP DATABASE IF EXISTS traveltime;
 CREATE DATABASE traveltime;
 USE traveltime;
 
+-- create user levels
+
+CREATE TABLE UserLevels (
+    level_id INT AUTO_INCREMENT PRIMARY KEY,
+    level_name VARCHAR(50) NOT NULL
+);
+
 -- users table
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
+    user_level_id INT,
     profile_picture VARCHAR(255) DEFAULT 'default.jpg',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_level_id) REFERENCES UserLevels(level_id) ON DELETE CASCADE
 );
 
 -- places table
@@ -106,7 +115,6 @@ SELECT * FROM tags WHERE tag_name = 'history';
 
 CREATE INDEX idx_user_id_trips ON trips(user_id); -- for user_id in trips table
 CREATE INDEX idx_place_id_trips ON trips(place_id); -- for place_id in trips table
-CREATE INDEX idx_user_id_comments ON comments(user_id); -- for comments by specific user
 CREATE INDEX idx_trip_id_comments ON comments(trip_id); -- for comments on specific trip 
 CREATE INDEX idx_user_id_likes ON likes(user_id); -- for likes by specific user
 CREATE INDEX idx_trip_id_likes ON likes(trip_id);
@@ -117,6 +125,8 @@ CREATE INDEX idx_follower_id_follows ON follows(follower_id); -- for followers l
 CREATE INDEX idx_trip_id_trip_tags ON trip_tags(trip_id);
 
 -- Inserting data
+
+INSERT INTO UserLevels (level_name) VALUES ('Admin'), ('User'), ('Guest');
 
 -- tags 
 
