@@ -115,7 +115,6 @@ SELECT * FROM tags WHERE tag_name = 'history';
 
 CREATE INDEX idx_user_id_trips ON trips(user_id); -- for user_id in trips table
 CREATE INDEX idx_place_id_trips ON trips(place_id); -- for place_id in trips table
-CREATE INDEX idx_user_id_comments ON comments(user_id); -- for comments by specific user
 CREATE INDEX idx_trip_id_comments ON comments(trip_id); -- for comments on specific trip 
 CREATE INDEX idx_user_id_likes ON likes(user_id); -- for likes by specific user
 CREATE INDEX idx_trip_id_likes ON likes(trip_id);
