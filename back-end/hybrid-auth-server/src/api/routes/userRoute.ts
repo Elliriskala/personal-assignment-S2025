@@ -29,7 +29,7 @@ router.post(
     .withMessage(
       'Username can only contain letters, numbers, underscores and dashes',
     ),
-  body('password')
+  body('password_hash')
     .isString()
     .isLength({min: 5})
     .withMessage('Password must be at least 5 characters long'),
@@ -55,7 +55,7 @@ router.put(
     .withMessage(
       'Username can only contain letters, numbers, underscores and dashes',
     ),
-  body('password')
+  body('password_hash')
     .optional()
     .isString()
     .isLength({min: 5})
@@ -89,7 +89,7 @@ router.route('/:id').put(
     .withMessage(
       'Username can only contain letters, numbers, underscores and dashes',
     ),
-  body('password')
+  body('password_hash')
     .optional()
     .isString()
     .isLength({min: 5})

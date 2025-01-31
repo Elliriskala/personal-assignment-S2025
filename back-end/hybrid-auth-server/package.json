@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
     "build": "tsc",
     "postbuild": "npm run apidoc",
@@ -13,16 +13,11 @@
     "apidoc": "apidoc -c apidoc.json -o public/  -t apidoc-template"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ilkkamtk/SSSF-auth-server.git"
+    "type": "git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ilkkamtk/SSSF-auth-server/issues"
-  },
-  "homepage": "https://github.com/ilkkamtk/SSSF-auth-server#readme",
   "dependencies": {
     "apidoc": "^1.2.0",
     "bcryptjs": "^2.4.3",

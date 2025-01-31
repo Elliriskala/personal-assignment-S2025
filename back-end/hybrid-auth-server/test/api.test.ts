@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unpublished-import */
 import app from '../src/app';
 import {UserWithLevel} from 'hybrid-types/DBTypes';
 import {getFound, getNotFound} from './serverFunctions';
@@ -12,6 +11,7 @@ import {
   modifyUser,
 } from './userFunctions';
 import randomstring from 'randomstring';
+import { describe, it } from 'node:test';
 
 const userpath = '/api/v1/users';
 const loginpath = '/api/v1/auth/login';
@@ -28,10 +28,10 @@ describe('GET /api/v1', () => {
   });
 
   // test user
-  const testuser: Pick<UserWithLevel, 'username' | 'email' | 'password'> = {
+  const testuser: Pick<UserWithLevel, 'username' | 'password_hash' | 'email' > = {
     username: 'testuser' + randomstring.generate(5),
     email: randomstring.generate(5) + '@test.com',
-    password: 'testpassword',
+    password_hash: 'testpassword',
   };
 
   // create a user

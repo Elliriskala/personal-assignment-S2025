@@ -1,0 +1,61 @@
+### create a user
+POST http://localhost:3001/api/v1/users
+Content-Type: application/json
+
+{
+  "username": "eltsunoora",
+  "password_hash": "popokissa123",
+  "email": "noorariskala@metropolia.fi",
+  "user_level_id": 2
+}
+
+### log in
+
+POST http://localhost:3001/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "eltsunoora",
+  "password_hash": "popokissa123"
+}
+
+
+### get all users
+
+GET http://localhost:3001/api/v1/users
+
+
+### update user
+
+PUT http://localhost:3001/api/v1/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJsZXZlbF9uYW1lIjoiVXNlciIsImlhdCI6MTczODI1MzY4M30.IAJdgZp0dkbt98kQmNgoVmdQ8VbcDt2Nao_cfoTpGXg
+Content-Type: application/json
+
+{
+    "username": "jolleee",
+    "password_hash": "kissakala123",
+    "email": "email12@example.com",
+    "profile_info": "Hey im joel!"
+}
+
+### update user as admin
+
+PUT http://localhost:3001/api/v1/users/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJsZXZlbF9uYW1lIjoiVXNlciIsImlhdCI6MTczODI1MzY4M30.IAJdgZp0dkbt98kQmNgoVmdQ8VbcDt2Nao_cfoTpGXg
+Content-Type: application/json
+
+{
+    "username": "jolleee",
+    "password_hash": "kissakala123",
+    "email": "email12@example.com",
+    "profile_info": "Hey im joel!"
+}
+
+### delete user
+
+DELETE http://localhost:3001/api/v1/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJsZXZlbF9uYW1lIjoiVXNlciIsImlhdCI6MTczODI1MzY4M30.IAJdgZp0dkbt98kQmNgoVmdQ8VbcDt2Nao_cfoTpGXg
+
+### delete user as admin
+DELETE http://localhost:3001/api/v1/users/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJsZXZlbF9uYW1lIjoiVXNlciIsImlhdCI6MTczODI1MzY4M30.IAJdgZp0dkbt98kQmNgoVmdQ8VbcDt2Nao_cfoTpGXg

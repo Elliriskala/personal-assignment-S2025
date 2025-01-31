@@ -12,7 +12,7 @@ router.post(
     .escape()
     .isLength({min: 3, max: 50})
     .withMessage('Username must be between 3-50 characters'),
-  body('password')
+  body('password_hash')
     .isString()
     .isLength({min: 5})
     .withMessage('Password must be at least 5 characters long'),

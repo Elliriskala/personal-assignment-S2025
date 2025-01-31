@@ -49,7 +49,7 @@ const getAllUsers = async (): Promise<UserWithNoPassword[]> => {
  */
 const getUserByEmail = async (email: string): Promise<UserWithLevel> => {
   const [rows] = await promisePool.execute<RowDataPacket[] & UserWithLevel[]>(
-    `SELECT Users.user_id, Users.username, Users.password, Users.email, Users.created_at, UserLevels.level_name
+    `SELECT Users.user_id, Users.username, Users.password_hash, Users.email, Users.created_at, UserLevels.level_name
      FROM Users
      JOIN UserLevels ON Users.user_level_id = UserLevels.level_id
      WHERE Users.email = ?`,
@@ -70,7 +70,7 @@ const getUserByEmail = async (email: string): Promise<UserWithLevel> => {
 
 const getUserByUsername = async (username: string): Promise<UserWithLevel> => {
   const [rows] = await promisePool.execute<RowDataPacket[] & UserWithLevel[]>(
-    `SELECT Users.user_id, Users.username, Users.password, Users.email, Users.profile_picture, Users.profile_info, Users.created_at, UserLevels.level_name
+    `SELECT Users.user_id, Users.username, Users.password_hash, Users.email, Users.profile_picture, Users.profile_info, Users.created_at, UserLevels.level_name
      FROM Users
      JOIN UserLevels ON Users.user_level_id = UserLevels.level_id
      WHERE Users.username = ?`,
@@ -90,16 +90,15 @@ const getUserByUsername = async (username: string): Promise<UserWithLevel> => {
  */
 
 const createUser = async (
-  user: Pick<User, 'username' | 'password_hash' | 'email'>,
-  userLevelId = 2,
+  user: Pick<User, 'username' | 'password_hash' | 'email' | 'user_level_id'>,
 ): Promise<UserWithNoPassword> => {
-  const sql = `INSERT INTO Users (username, password, email, user_level_id)
+  const sql = `INSERT INTO Users (username, password_hash, email, user_level_id)
        VALUES (?, ?, ?, ?)`;
   const stmt = promisePool.format(sql, [
     user.username,
     user.password_hash,
     user.email,
-    userLevelId,
+    user.user_level_id
   ]);
   const [result] = await promisePool.execute<ResultSetHeader>(stmt);
 
@@ -125,7 +124,7 @@ const modifyUser = async (
   try {
     await connection.beginTransaction();
 
-    const allowedFields = ['username', 'email', 'password', 'user_level_id', 'profile_picture', 'profile_info'];
+    const allowedFields = ['username', 'email', 'password_hash', 'user_level_id', 'profile_picture', 'profile_info'];
     const updates = Object.entries(user)
       .filter(([key]) => allowedFields.includes(key))
       .map(([key]) => `${key} = ?`);
@@ -164,7 +163,6 @@ const deleteUser = async (id: number): Promise<UserDeleteResponse> => {
   const connection = await promisePool.getConnection();
   try {
     await connection.beginTransaction();
-    await connection.execute('DELETE FROM MediaItems WHERE user_id = ?;', [id]);
     const [result] = await connection.execute<ResultSetHeader>(
       'DELETE FROM Users WHERE user_id = ?;',
       [id],

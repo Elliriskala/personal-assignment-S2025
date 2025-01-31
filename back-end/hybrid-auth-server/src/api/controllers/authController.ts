@@ -1,4 +1,4 @@
-import { UserWithLevel, TokenContent } from 'hybrid-types/DBTypes';
+import {UserWithLevel, TokenContent} from 'hybrid-types/DBTypes';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import {NextFunction, Request, Response} from 'express';
@@ -23,6 +23,11 @@ const login = async (
     const {username, password_hash} = req.body;
     const user = await getUserByUsername(username);
 
+    if (!user) {
+      next(new CustomError('User not found', 404));
+      return;
+    }
+
     if (!bcrypt.compareSync(password_hash, user.password_hash)) {
       next(new CustomError('Incorrect username/password', 403));
       return;
@@ -39,8 +44,8 @@ const login = async (
       email: user.email,
       profile_picture: user.profile_picture,
       profile_info: user.profile_info,
-      created_at: user.created_at,
       level_name: user.level_name,
+      created_at: user.created_at
     };
 
     const tokenContent: TokenContent = {
