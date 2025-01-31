@@ -1,6 +1,6 @@
 import {ERROR_MESSAGES} from '../../utils/errorMessages';
 import {ResultSetHeader, RowDataPacket} from 'mysql2';
-import {MediaItem, UserLevel} from 'hybrid-types/DBTypes';
+import {TravelPost, UserLevel} from 'hybrid-types/DBTypes';
 import promisePool from '../../lib/db';
 import {MessageResponse} from 'hybrid-types/MessageTypes';
 import CustomError from '../../classes/CustomError';
@@ -50,7 +50,7 @@ const BASE_MEDIA_QUERY = `
 const fetchAllMedia = async (
   page: number | undefined = undefined,
   limit: number | undefined = undefined,
-): Promise<MediaItem[]> => {
+): Promise<TravelPost[]> => {
   const offset = ((page || 1) - 1) * (limit || 10);
   const sql = `${BASE_MEDIA_QUERY}
     ${limit ? 'LIMIT ? OFFSET ?' : ''}`;
@@ -58,17 +58,17 @@ const fetchAllMedia = async (
   const stmt = promisePool.format(sql, params);
   console.log(stmt);
 
-  const [rows] = await promisePool.execute<RowDataPacket[] & MediaItem[]>(stmt);
+  const [rows] = await promisePool.execute<RowDataPacket[] & TravelPost[]>(stmt);
   return rows;
 };
 
-const fetchMediaById = async (id: number): Promise<MediaItem> => {
+const fetchMediaById = async (id: number): Promise<TravelPost> => {
   const sql = `${BASE_MEDIA_QUERY}
               WHERE media_id=?`;
   const params = [uploadPath, id];
   const stmt = promisePool.format(sql, params);
   console.log(stmt);
-  const [rows] = await promisePool.execute<RowDataPacket[] & MediaItem[]>(stmt);
+  const [rows] = await promisePool.execute<RowDataPacket[] & TravelPost[]>(stmt);
   if (rows.length === 0) {
     throw new CustomError(ERROR_MESSAGES.MEDIA.NOT_FOUND, 404);
   }
@@ -76,12 +76,12 @@ const fetchMediaById = async (id: number): Promise<MediaItem> => {
 };
 
 const postMedia = async (
-  media: Omit<MediaItem, 'media_id' | 'created_at' | 'thumbnail'>,
-): Promise<MediaItem> => {
-  const {user_id, filename, filesize, media_type, title, description} = media;
-  const sql = `INSERT INTO MediaItems (user_id, filename, filesize, media_type, title, description)
+  media: Omit<TravelPost, 'media_id' | 'created_at' | 'thumbnail'>,
+): Promise<TravelPost> => {
+  const {user_id, post_image, continent, country, city, start_date, end_date, description} = media;
+  const sql = `INSERT INTO TravelPosts (user_id, post_image, continent, country, city, start_date, end_date, description)
                VALUES (?, ?, ?, ?, ?, ?)`;
-  const params = [user_id, filename, filesize, media_type, title, description];
+  const params = [user_id, post_image, continent, country, city, start_date, end_date, description];
   const stmt = promisePool.format(sql, params);
   console.log(stmt);
   const [result] = await promisePool.execute<ResultSetHeader>(stmt);
@@ -93,11 +93,11 @@ const postMedia = async (
 };
 
 const putMedia = async (
-  media: Pick<MediaItem, 'title' | 'description'>,
+  media: Pick<TravelPost, 'country' | 'description'>,
   id: number,
   user_id: number,
   user_level: UserLevel['level_name'],
-): Promise<MediaItem> => {
+): Promise<TravelPost> => {
   const sql =
     user_level === 'Admin'
       ? 'UPDATE MediaItems SET title = ?, description = ? WHERE media_id = ?'
@@ -105,8 +105,8 @@ const putMedia = async (
 
   const params =
     user_level === 'Admin'
-      ? [media.title, media.description, id]
-      : [media.title, media.description, id, user_id];
+      ? [media.country, media.description, id]
+      : [media.country, media.description, id, user_id];
 
   const stmt = promisePool.format(sql, params);
   const [result] = await promisePool.execute<ResultSetHeader>(stmt);
@@ -129,11 +129,6 @@ const deleteMedia = async (
   if (!media) {
     return {message: 'Media not found'};
   }
-
-  media.filename = media?.filename.replace(
-    process.env.UPLOAD_URL as string,
-    '',
-  );
 
   const connection = await promisePool.getConnection();
 
@@ -178,7 +173,7 @@ const deleteMedia = async (
 
   try {
     const deleteResult = await fetchData<MessageResponse>(
-      `${process.env.UPLOAD_SERVER}/delete/${media.filename}`,
+      `${process.env.UPLOAD_SERVER}/delete/${media}`,
       options,
     );
 
@@ -194,17 +189,17 @@ const deleteMedia = async (
   };
 };
 
-const fetchMediaByUserId = async (user_id: number): Promise<MediaItem[]> => {
+const fetchMediaByUserId = async (user_id: number): Promise<TravelPost[]> => {
   const sql = `${BASE_MEDIA_QUERY} WHERE user_id = ?`;
   const params = [uploadPath, user_id];
   const stmt = promisePool.format(sql, params);
   console.log(stmt);
 
-  const [rows] = await promisePool.execute<RowDataPacket[] & MediaItem[]>(stmt);
+  const [rows] = await promisePool.execute<RowDataPacket[] & TravelPost[]>(stmt);
   return rows;
 };
 
-const fetchMostLikedMedia = async (): Promise<MediaItem> => {
+const fetchMostLikedMedia = async (): Promise<TravelPost> => {
   // you could also use a view for this
   const sql = `${BASE_MEDIA_QUERY}
      WHERE media_id = (
@@ -218,7 +213,7 @@ const fetchMostLikedMedia = async (): Promise<MediaItem> => {
   console.log(stmt);
 
   const [rows] = await promisePool.execute<
-    RowDataPacket[] & MediaItem[] & {likes_count: number}
+    RowDataPacket[] & TravelPost[] & {likes_count: number}
   >(stmt);
 
   if (!rows.length) {

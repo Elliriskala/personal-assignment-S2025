@@ -24,15 +24,6 @@ export const ERROR_MESSAGES = {
     NOT_AUTHORIZED: 'Not authorized to modify tags',
     FILES_NOT_FOUND: 'No files found with this tag',
   },
-  RATING: {
-    NOT_FOUND: 'No ratings found',
-    NOT_FOUND_MEDIA: 'No ratings found for media',
-    NOT_FOUND_USER: 'No ratings found for user',
-    NOT_CREATED: 'Rating not created',
-    NOT_DELETED: 'Rating not deleted',
-    NOT_UPDATED: 'Rating not updated',
-    ALREADY_EXISTS: 'User has already rated this media item',
-  },
   COMMENT: {
     NOT_FOUND: 'No comments found',
     NOT_FOUND_MEDIA: 'No comments found for media',
@@ -42,4 +33,11 @@ export const ERROR_MESSAGES = {
     NOT_UPDATED: 'Comment not updated',
     NO_ID: 'No comment id provided',
   },
+  FOLLOW: {
+    NOT_FOUND_FOLLOWERS: 'No followers found',
+    NOT_FOUND_FOLLOWINGS: 'No follings found',
+    NOT_CREATED: 'Following failed',
+    NOT_DELETED: 'Unfollowing failed',
+    ALREADY_EXISTS: 'User already following this user'
+  }
 } as const;

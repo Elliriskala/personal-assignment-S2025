@@ -9,13 +9,13 @@ import {
   putMedia,
 } from '../models/mediaModel';
 import {MessageResponse} from 'hybrid-types/MessageTypes';
-import {MediaItem, TokenContent} from 'hybrid-types/DBTypes';
+import {TravelPost, TokenContent} from 'hybrid-types/DBTypes';
 import CustomError from '../../classes/CustomError';
 import {ERROR_MESSAGES} from '../../utils/errorMessages';
 
 const mediaListGet = async (
   req: Request<{}, {}, {page: string; limit: string}>,
-  res: Response<MediaItem[]>,
+  res: Response<TravelPost[]>,
   next: NextFunction,
 ) => {
   try {
@@ -29,7 +29,7 @@ const mediaListGet = async (
 
 const mediaGet = async (
   req: Request<{id: string}>,
-  res: Response<MediaItem>,
+  res: Response<TravelPost>,
   next: NextFunction,
 ) => {
   try {
@@ -42,7 +42,7 @@ const mediaGet = async (
 };
 
 const mediaPost = async (
-  req: Request<{}, {}, Omit<MediaItem, 'media_id' | 'created_at'>>,
+  req: Request<{}, {}, Omit<TravelPost, 'media_id' | 'created_at'>>,
   res: Response<MessageResponse, {user: TokenContent}>,
   next: NextFunction,
 ) => {
@@ -76,7 +76,7 @@ const mediaDelete = async (
 };
 
 const mediaPut = async (
-  req: Request<{id: string}, {}, Pick<MediaItem, 'title' | 'description'>>,
+  req: Request<{id: string}, {}, Pick<TravelPost, 'country' | 'description'>>,
   res: Response<MessageResponse, {user: TokenContent}>,
   next: NextFunction,
 ) => {
@@ -96,7 +96,7 @@ const mediaPut = async (
 
 const mediaByUserGet = async (
   req: Request<{id: string}>,
-  res: Response<MediaItem[], {user: TokenContent}>,
+  res: Response<TravelPost[], {user: TokenContent}>,
   next: NextFunction,
 ) => {
   try {
@@ -114,7 +114,7 @@ const mediaByUserGet = async (
 
 const mediaListMostLikedGet = async (
   req: Request,
-  res: Response<MediaItem>,
+  res: Response<TravelPost>,
   next: NextFunction,
 ) => {
   try {

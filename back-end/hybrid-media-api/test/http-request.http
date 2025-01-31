@@ -1,0 +1,25 @@
+### follow a user
+POST http://localhost:3000/api/v1/follow
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyMCwibGV2ZWxfbmFtZSI6IlVzZXIiLCJpYXQiOjE3MzgzMTgwODV9.XTX0BT449RsY8Ab4aPrpceXEXgfRM0U3abpRcDaGank
+Content-Type: application/json
+
+{
+  "follower_id": 20,
+  "following_id": 5
+}
+
+### select all users' followers
+GET http://localhost:3000/api/v1/follow/followers/2
+
+### select all users' followings
+GET http://localhost:3000/api/v1/follow/followings/20
+
+### unfollow a user
+DELETE http://localhost:3000/api/v1/follow
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyMCwibGV2ZWxfbmFtZSI6IlVzZXIiLCJpYXQiOjE3MzgzMTgwODV9.XTX0BT449RsY8Ab4aPrpceXEXgfRM0U3abpRcDaGank
+Content-Type: application/json
+
+{
+  "follower_id": 20,
+  "following_id": 2
+}

@@ -1,5 +1,5 @@
 import {ResultSetHeader, RowDataPacket} from 'mysql2';
-import {MediaItem, Tag, TagResult} from 'hybrid-types/DBTypes';
+import {TravelPost, Tag, TagResult} from 'hybrid-types/DBTypes';
 import promisePool from '../../lib/db';
 import {MessageResponse} from 'hybrid-types/MessageTypes';
 import CustomError from '../../classes/CustomError';
@@ -13,8 +13,8 @@ const fetchAllTags = async (): Promise<Tag[]> => {
   return rows;
 };
 
-const fetchFilesByTagById = async (tag_id: number): Promise<MediaItem[]> => {
-  const [rows] = await promisePool.execute<RowDataPacket[] & MediaItem[]>(
+const fetchFilesByTagById = async (tag_id: number): Promise<TravelPost[]> => {
+  const [rows] = await promisePool.execute<RowDataPacket[] & TravelPost[]>(
     `SELECT * FROM MediaItems
      JOIN MediaItemTags ON MediaItems.media_id = MediaItemTags.media_id
      WHERE MediaItemTags.tag_id = ?`,

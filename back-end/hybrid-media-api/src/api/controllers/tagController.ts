@@ -8,7 +8,7 @@ import {
   deleteTagFromMedia,
 } from '../models/tagModel';
 import {MessageResponse} from 'hybrid-types/MessageTypes';
-import {MediaItem, Tag, TagResult, TokenContent} from 'hybrid-types/DBTypes';
+import {TravelPost, Tag, TagResult, TokenContent} from 'hybrid-types/DBTypes';
 import CustomError from '../../classes/CustomError';
 
 const tagListGet = async (
@@ -52,7 +52,7 @@ const tagPost = async (
 
 const tagFilesByTagGet = async (
   req: Request<{tag_id: string}>,
-  res: Response<MediaItem[]>,
+  res: Response<TravelPost[]>,
   next: NextFunction,
 ) => {
   try {
