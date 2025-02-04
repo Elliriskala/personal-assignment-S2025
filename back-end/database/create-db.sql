@@ -76,9 +76,11 @@ CREATE TABLE Comments (
     user_id INT NOT NULL,
     post_id INT NOT NULL,
     comment VARCHAR(300) NOT NULL,
+    parent_comment_id INT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (post_id) REFERENCES TravelPosts(post_id) ON DELETE CASCADE
+    FOREIGN KEY (post_id) REFERENCES TravelPosts(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (parent_comment_id) REFERENCES Comments(comment_id) ON DELETE CASCADE
 );
 
 -- follows table
@@ -96,10 +98,12 @@ CREATE TABLE Follows (
 
 CREATE TABLE Notifications (
     notification_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT NOT NULL, -- user who receives the notification
     notification_text TEXT NOT NULL,
     is_seen BOOLEAN DEFAULT FALSE,
     notification_type ENUM('Follows', 'Comment') NOT NULL,
+    related_post_id INT NULL,
+    related_user_id INT NULL, -- user who commented or followed
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
@@ -126,6 +130,10 @@ CREATE INDEX idx_follower_id_follows ON Follows(follower_id); -- for followers l
 -- index to join posts and tags
 
 CREATE INDEX idx_post_id_post_tags ON PostTags(post_id);
+
+CREATE INDEX idx_created_at_comments ON Comments(created_at);
+CREATE INDEX idx_created_at_notifications ON Notifications(created_at);
+CREATE INDEX idx_lat_long ON TravelPosts(latitude, longitude);
 
 -- Inserting data
 
